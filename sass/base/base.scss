@@ -1,0 +1,48 @@
+@import "theme.scss";
+
+:root {
+    color-scheme: dark;
+    scrollbar-color: #737373 #38383D;
+}
+
+body {
+    background-color: $bg-main;
+    color: $text;
+    font-family: $font;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+a {
+    color: $link-color;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+code, pre {
+    font-family: $monospace;
+}
+
+pre {
+    background-color: #2f2f2f;
+    font-family: $monospace;
+    overflow: auto;
+    max-height: 30vh;
+    padding: .75rem;
+    box-shadow: $shadow;
+    border-radius: 5px;
+}
+
+blockquote {
+    color: $text-darker;
+    display: block;
+    border-left: .5rem solid #333;
+    margin: 1rem;
+    padding: 1px 1rem;
+    box-shadow: $shadow;
+    border-radius: 5px;
+}

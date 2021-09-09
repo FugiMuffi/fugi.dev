@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico?v=1" sizes="any">
+  <link rel="icon" href="/favicon.svg?v=1" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1">
+  <link rel="manifest" href="/manifest.webmanifest?v=1">
+  <meta name="theme-color" content="#2b2b2b">
+  <title>fugi.dev{% if page and page.title | length > 0 %}{{" | " ~ page.title | safe}}{% elif section and section.title | length > 0 %}{{" | " ~ section.title | safe}}{% endif %}</title>
+  <link href="/fontawesome/css/all.min.css" rel="stylesheet">
+  {% block head %} {% endblock %}
+</head>
+
+<body>
+  {% include "base/header.html" %}
+  <main>
+    <div class="wrapper">
+      {% block content %} {% endblock %}
+    </div>
+  </main>
+  {% include "base/footer.html" %}
+</body>
+
+</html>

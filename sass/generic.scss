@@ -1,0 +1,83 @@
+@import "base/base.scss";
+
+$body-padding: #{'15vw - 50px'};
+$body-width: #{'min(800px, 90%)'};
+$spacing-vertical: 1rem;
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main, header, footer {
+    padding: $spacing-vertical 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .wrapper {
+        width: 100%;
+        max-width: $body-width;
+    }
+}
+
+header {
+    background-color: $bg-header;
+
+    h1 {
+        font-size: 1.6rem;
+        margin-bottom: 5px;
+        margin-top: 0px;
+        display: block;
+    }
+
+    nav {
+        margin-top: 1rem;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        padding-left: 0;
+        margin: 0;
+
+        li:not(:last-child)::after {
+            content: "\00a0·\00a0";
+        }
+    }
+}
+
+main {
+    flex: auto;
+    padding-top: 1.5rem;
+
+    & > :first-child {
+        margin-top: 0;
+    }
+}
+
+footer {
+    background-color: $bg-footer;
+    color: $text-darker;
+}
+
+footer .wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        color: #ddd;
+    }
+
+    a > i {
+        margin-left: 3px;
+    }
+}
