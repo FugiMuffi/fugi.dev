@@ -1,0 +1,39 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+  event:
+    - push
+
+steps:
+- name: tag-commit-hash
+  image: debian
+  commands:
+  - echo '${DRONE_COMMIT:0:8}' > .tags
+
+- name: tag-dev
+  image: debian
+  when:
+    branch:
+    - dev
+  commands:
+  - sed -i '$s/$/,dev/' .tags
+
+- name: tag-latest
+  image: debian
+  when:
+    branch:
+    - main
+  commands:
+  - sed -i '$s/$/,latest/' .tags
+
+- name: build-image
+  image: plugins/docker
+  settings:
+    repo: fugimuffi/fugi.dev
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_token
