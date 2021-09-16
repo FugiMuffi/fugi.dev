@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  fugidev:
+    image: 'fugimuffi/fugi.dev:latest'
+    build: .
+    container_name: 'fugidev'
+    restart: unless-stopped
+    # ports:
+    #  - '80:80' # if not using reverse proxy
+
+networks:
+  default: # reverse proxy
+    name: swag-net
+    external: true

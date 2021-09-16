@@ -1,11 +1,10 @@
----
 kind: pipeline
 type: docker
-name: default
+name: build
 
 trigger:
   event:
-    - push
+  - push
 
 steps:
 - name: tag-commit-hash
@@ -37,3 +36,55 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_token
+
+---
+kind: pipeline
+type: ssh
+name: deploy
+
+depends_on:
+- build
+
+trigger:
+  branch:
+  - main
+  - dev
+  event:
+  - push
+
+server:
+  host:
+    from_secret: ssh_host
+  user:
+    from_secret: ssh_user
+  ssh_key:
+    from_secret: ssh_key
+
+steps:
+- name: deploy-staging
+  when:
+    branch:
+    - dev
+  environment:
+    DOCKER_USER:
+      from_secret: docker_username
+    DOCKER_PASS:
+      from_secret: docker_token
+  commands:
+  - docker login -u $${DOCKER_USER} -p $${DOCKER_PASS}
+  - docker-compose -p fugidev-staging -f docker-compose.staging.yml pull
+  - docker-compose -p fugidev-staging -f docker-compose.staging.yml up --no-build -d
+
+- name: deploy-production
+  when:
+    branch:
+    - main
+  environment:
+    DOCKER_USER:
+      from_secret: docker_username
+    DOCKER_PASS:
+      from_secret: docker_token
+  commands:
+  - docker login -u $${DOCKER_USER} -p $${DOCKER_PASS}
+  - docker-compose -p fugidev -f docker-compose.yml pull
+  - docker-compose -p fugidev -f docker-compose.yml up --no-build -d
