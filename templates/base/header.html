@@ -1,11 +1,18 @@
 <header>
   <div class="wrapper">
-    <h1>Fugi</h1>
+    <h1>
+    {%- if page and page.title -%}
+      {{ page.title }}
+    {%- else -%}
+      Fugi
+    {%- endif -%}
+    </h1>
     <nav>
       <ul>
         <li><a href="/">home</a></li>
         <li><a href="/blog">blog</a></li>
         <li><a href="/contact">contact</a></li>
+        <li><a href="/services">services</a></li>
       </ul>
     </nav>
   </div>

@@ -46,3 +46,44 @@ blockquote {
     box-shadow: $shadow;
     border-radius: 5px;
 }
+
+.card {
+    position: relative;
+    background: $bg-header;
+    padding: .75rem;
+    margin-bottom: 1.5rem;
+    border-radius: .5rem;
+    box-shadow: $shadow;
+
+    display: grid;
+    grid-template-columns: 80px auto;
+    column-gap: .75rem;
+
+    .status {
+        position: absolute;
+        top: .5rem;
+        right: .5rem;
+        width: .5rem;
+        height: .5rem;
+        border-radius: .5rem;
+
+        &.status-active {
+            background-color: #0f0;
+        }
+
+        &.status-inactive {
+            background-color: #ff0;
+        }
+
+        &.status-offline {
+            background-color: #f00;
+        }
+    }
+
+    .icon {
+        background-color: $text;
+        --icon-url: url('/icons/fugi.svg'); // default icon
+        mask: var(--icon-url) no-repeat center / contain;
+        -webkit-mask: var(--icon-url) no-repeat center / contain;
+    }
+}
